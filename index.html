@@ -1,0 +1,350 @@
+<!--
+Huzaifa's Developer Portfolio - Single-file static site
+
+Features:
+- Responsive modern design ready for GitHub Pages (no build step).
+- Auto-fetches ALL public repositories from GitHub for user: https://github.com/HuzaifaBinAhmed
+  - Excludes forks and empty repositories (size === 0).
+  - Sorted by last updated (most recent first).
+- Sections: Hero, About, Experience (chronological newest→oldest), Services (cards), Projects (live), Skills, Languages, Contact.
+- Put your profile photo at: /photo.jpg
+- Put your resume at: /CV.pdf
+
+How to use:
+1. Save as index.html in your repo root alongside photo.jpg and CV.pdf.
+2. Push to GitHub and enable Pages (branch: main, folder: /).
+3. That's it — projects will appear automatically.
+
+Notes:
+- GitHub's public API has unauthenticated rate limits (60 requests/hour per IP). If your users hit the limit, the page falls back to a link to your GitHub profile.
+- If you prefer always-up-to-date content without client-side rate limits, we can implement a tiny GitHub Actions job to cache repo data to a JSON file in the repo.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Muhammed Huzaifa — Portfolio</title>
+  <meta name="description" content="Portfolio of Muhammed Huzaifa — .NET Developer, Web & Automation" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#0ea5a3;
+      --accent-2:#60a5fa;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071023);color:#e6eef8}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:1100px;margin:28px auto;padding:20px}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:160px 1fr;gap:22px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:20px;border-radius:18px;backdrop-filter:blur(6px);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
+    .avatar{width:150px;height:150px;border-radius:14px;overflow:hidden;border:4px solid rgba(255,255,255,0.04)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    h1{margin:0;font-size:clamp(20px,3.5vw,34px)}
+    .tag{color:var(--muted);margin:8px 0 14px}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{background:linear-gradient(90deg,var(--accent),#34d399);color:#022; padding:10px 14px;border-radius:12px;font-weight:700;border:none;cursor:pointer}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:12px;color:var(--muted)}
+
+    /* LAYOUT */
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .section-title h3{margin:0}
+    ul.clean{list-style:none;padding:0;margin:0}
+    .skill-pill{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;margin:6px 6px 0 0;color:var(--muted);font-weight:600}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Experience */
+    .exp{margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .company{display:flex;justify-content:space-between;align-items:center}
+    .role{font-weight:700}
+
+    /* Services grid */
+    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .service-card{background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .service-card h4{margin:0 0 6px}
+    .service-card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:1fr;gap:12px}
+    .repo{display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.01)}
+    .repo .meta{max-width:75%}
+    .repo h4{margin:0 0 6px}
+    .repo p{margin:0;color:var(--muted);font-size:13px}
+    .repo .actions{display:flex;gap:8px;align-items:center}
+    .small-btn{padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+
+    /* Responsive */
+    @media (max-width:980px){.grid{grid-template-columns:1fr}.services{grid-template-columns:1fr}.avatar{width:110px;height:110px}} 
+
+    /* animations */
+    .fade-up{opacity:0;transform:translateY(8px);animation:fadeUp .6s forwards}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="hero fade-up">
+      <div class="avatar">
+        <img src="photo.jpg" alt="Muhammed Huzaifa">
+      </div>
+      <div>
+        <h1>Muhammed Huzaifa <span class="muted">— .NET Developer & Automation Engineer</span></h1>
+        <p class="tag">BSCS (PAF-KIET) • .NET & Desktop Apps • n8n Automation • Discord Bot Development</p>
+        <div class="cta">
+          <a class="btn" href="CV.pdf" download>Download CV</a>
+          <a class="ghost" href="#contact">Contact</a>
+          <a class="ghost" href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener">GitHub</a>
+          <a class="ghost" href="https://www.linkedin.com/in/muhammed-huzaifa-bin-ahmed-154870276/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section>
+
+        <div class="card fade-up" style="margin-bottom:16px">
+          <div class="section-title"><h3>About</h3></div>
+          <p>
+            Passionate .NET and web developer focused on building modern websites, desktop applications, and automation tools using <strong>n8n</strong>. Seeking <strong>part-time and freelance opportunities</strong> to deliver scalable software solutions and automation for clients and startups.
+          </p>
+        </div>
+
+        <div class="card fade-up">
+          <div class="section-title"><h3>Experience</h3></div>
+
+          <!-- Chronological: newest → oldest (Talents2Germany top) -->
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">IT & Customer Service Intern — Talents2Germany</div>
+                <div class="muted">Aug 2025 — Sep 2025</div>
+              </div>
+            </div>
+            <p>Connected the company with international candidates and created <strong>n8n AI agents</strong> to automate the hiring process and improve workflow efficiency.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Business Development Manager & CFO — CyberHub</div>
+                <div class="muted">Feb 2024 — May 2025</div>
+              </div>
+            </div>
+            <p>Helped a call center startup gain clients and manage finances; contributed to strategy and client outreach.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Web Developer Intern → Senior Lead — Gao Tek Inc.</div>
+                <div class="muted">Sep 2023 — May 2024</div>
+              </div>
+            </div>
+            <p>Progressed from Web Developer Intern to Senior Lead; managed a team of 40+, coordinated WordPress page builds and project delivery.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Call Center Representative — The Vision</div>
+                <div class="muted">Aug 2023 — Oct 2023</div>
+              </div>
+            </div>
+            <p>Answered customer queries, provided solutions, and ensured customer satisfaction.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Call Center Representative — Global Resource Group</div>
+                <div class="muted">Jul 2022 — Oct 2022</div>
+              </div>
+            </div>
+            <p>Handled customer calls, addressing concerns and providing solutions.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Call Center Representative — Hello International Marketing Solutions</div>
+                <div class="muted">Mar 2020 — Feb 2022</div>
+              </div>
+            </div>
+            <p>Achieved top sales records and assisted customers with inquiries and support.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Typist / Designer — KHF Educational Network</div>
+                <div class="muted">(date not specified in CV)</div>
+              </div>
+            </div>
+            <p>Provided typing and basic design support for educational content.</p>
+          </div>
+
+        </div>
+
+        <div class="card fade-up" style="margin-top:16px">
+          <div class="section-title"><h3>Services</h3></div>
+          <div class="services">
+            <div class="service-card">
+              <h4>.NET Website Development</h4>
+              <p>Build responsive, secure websites and web apps using .NET (MVC, Razor) and modern front-end tech.</p>
+            </div>
+            <div class="service-card">
+              <h4>Desktop Application Development</h4>
+              <p>Design and deliver Windows desktop apps using C# and .NET (WinForms, WPF).</p>
+            </div>
+            <div class="service-card">
+              <h4>n8n Automation & AI Agents</h4>
+              <p>Automate workflows, integrate APIs and create hiring/operational AI agents using n8n.</p>
+            </div>
+            <div class="service-card">
+              <h4>Discord Bot Development</h4>
+              <p>Create bots for moderation, notifications, and custom community workflows.</p>
+            </div>
+            <div class="service-card">
+              <h4>Database Design & SQL</h4>
+              <p>Design normalized databases, write efficient queries and manage data integrity.</p>
+            </div>
+            <div class="service-card">
+              <h4>Web Automation</h4>
+              <p>Automate workflows you do manually. Like going on a website and filling a form</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-up" style="margin-top:16px">
+          <div class="section-title"><h3>Projects</h3></div>
+          <div id="projects" class="projects">
+            <!-- repos populate here -->
+          </div>
+        </div>
+
+      </section>
+
+      <aside>
+        <div class="card fade-up">
+          <div class="section-title"><h3>Education</h3></div>
+          <p><strong>BSCS — PAF-KIET</strong><br><span class="muted">2022 — 2026</span></p>
+          <p><strong>Intermediate — Sindh Board</strong><br><span class="muted">2021</span></p>
+          <p><strong>Matriculation — Sindh Board</strong><br><span class="muted">2019</span></p>
+        </div>
+
+        <div class="card fade-up" style="margin-top:14px">
+          <div class="section-title"><h3>Skills</h3></div>
+          <div>
+            <span class="skill-pill">C# / .NET</span>
+            <span class="skill-pill">ASP.NET / MVC</span>
+            <span class="skill-pill">WinForms / WPF</span>
+            <span class="skill-pill">Python (basics)</span>
+            <span class="skill-pill">C / C++</span>
+            <span class="skill-pill">SQL</span>
+            <span class="skill-pill">WordPress</span>
+            <span class="skill-pill">Networking & Subnetting</span>
+            <span class="skill-pill">n8n Automation</span>
+            <span class="skill-pill">Discord Bot Development</span>
+            <span class="skill-pill">Leadership</span>
+          </div>
+        </div>
+
+        <div class="card fade-up" style="margin-top:14px">
+          <div class="section-title"><h3>Languages</h3></div>
+          <p class="muted">English — Fluent<br>Urdu — Native</p>
+        </div>
+
+        <div class="card fade-up" style="margin-top:14px">
+          <div class="section-title"><h3>Contact</h3></div>
+          <p class="muted">Karachi, Pakistan</p>
+          <p>Email: <a href="mailto:huzaifaahmed3211@gmail.com">huzaifaahmed3211@gmail.com</a><br>Phone: <a href="tel:+923212829706">+92 321 2829706</a></p>
+        </div>
+      </aside>
+    </main>
+
+    <footer id="contact" style="margin-top:22px;text-align:center;color:var(--muted)">
+      <p>© 2025 <a href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener">@HuzaifaBinAhmed</a> All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Progressive reveal
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('.fade-up').forEach((el,i)=>el.style.animationDelay=(i*80)+'ms');
+      fetchRepos();
+    });
+
+    async function fetchRepos(){
+      const user = 'HuzaifaBinAhmed';
+      const projectsEl = document.getElementById('projects');
+      projectsEl.innerHTML = '<p class="muted">Loading projects…</p>';
+
+      try{
+        const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&sort=updated&direction=desc`);
+        if(!res.ok){
+          throw new Error('GitHub API error');
+        }
+        const repos = await res.json();
+        // Filter: exclude forks and empty repos (size === 0)
+        const filtered = repos.filter(r => !r.fork && r.size > 0);
+        if(filtered.length === 0){
+          projectsEl.innerHTML = '<p class="muted">No repositories to show. <a href="https://github.com/'+user+'" target="_blank">Visit GitHub</a></p>';
+          return;
+        }
+
+        projectsEl.innerHTML = '';
+        filtered.forEach(r => {
+          const div = document.createElement('div');
+          div.className = 'repo';
+          const name = document.createElement('div');
+          name.className = 'meta';
+          const title = document.createElement('h4');
+          title.textContent = r.name.replace(/[-_.]/g,' ');
+          const desc = document.createElement('p');
+          desc.textContent = r.description || 'No description provided.';
+          name.appendChild(title);
+          name.appendChild(desc);
+
+          const actions = document.createElement('div');
+          actions.className = 'actions';
+          const link = document.createElement('a');
+          link.href = r.html_url;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.className = 'small-btn';
+          link.textContent = 'View on GitHub';
+
+          // additional meta: language and stars
+          const meta = document.createElement('div');
+          meta.style.textAlign = 'right';
+          const lang = document.createElement('div');
+          lang.className = 'muted';
+          lang.textContent = r.language ? r.language + (r.stargazers_count ? ' • ⭐ '+r.stargazers_count : '') : (r.stargazers_count ? '⭐ '+r.stargazers_count : '');
+          meta.appendChild(lang);
+
+          actions.appendChild(link);
+          div.appendChild(name);
+          div.appendChild(actions);
+          div.appendChild(meta);
+          projectsEl.appendChild(div);
+        });
+
+      }catch(err){
+        console.error(err);
+        projectsEl.innerHTML = '<p class="muted">Could not load projects (GitHub rate limit or network issue). <a href="https://github.com/'+user+'" target="_blank">View on GitHub</a></p>';
+      }
+    }
+  </script>
+</body>
+</html>
