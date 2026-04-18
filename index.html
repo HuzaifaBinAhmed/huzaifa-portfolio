@@ -1,25 +1,3 @@
-<!--
-Huzaifa's Developer Portfolio - Single-file static site
-
-Features:
-- Responsive modern design ready for GitHub Pages (no build step).
-- Auto-fetches ALL public repositories from GitHub for user: https://github.com/HuzaifaBinAhmed
-  - Excludes forks and empty repositories (size === 0).
-  - Sorted by last updated (most recent first).
-- Sections: Hero, About, Experience (chronological newest→oldest), Services (cards), Projects (live), Skills, Languages, Contact.
-- Put your profile photo at: /photo.jpg
-- Put your resume at: /CV.pdf
-
-How to use:
-1. Save as index.html in your repo root alongside photo.jpg and CV.pdf.
-2. Push to GitHub and enable Pages (branch: main, folder: /).
-3. That's it — projects will appear automatically.
-
-Notes:
-- GitHub's public API has unauthenticated rate limits (60 requests/hour per IP). If your users hit the limit, the page falls back to a link to your GitHub profile.
-- If you prefer always-up-to-date content without client-side rate limits, we can implement a tiny GitHub Actions job to cache repo data to a JSON file in the repo.
--->
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -103,7 +81,7 @@ Notes:
         <p class="tag">BSCS (PAF-KIET) • .NET & Desktop Apps • n8n Automation • Discord Bot Development</p>
         <div class="cta">
           <a class="btn" href="CV.pdf" download>Download CV</a>
-          <a class="ghost" href="#contact">Contact</a>
+	<a class="ghost" href="#contact-info">Contact</a>
           <a class="ghost" href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener">GitHub</a>
           <a class="ghost" href="https://www.linkedin.com/in/muhammed-huzaifa-bin-ahmed-154870276/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
@@ -116,14 +94,33 @@ Notes:
         <div class="card fade-up" style="margin-bottom:16px">
           <div class="section-title"><h3>About</h3></div>
           <p>
-            Passionate .NET and web developer focused on building modern websites, desktop applications, and automation tools using <strong>n8n</strong>. Seeking <strong>part-time and freelance opportunities</strong> to deliver scalable software solutions and automation for clients and startups.
+            Passionate .NET and web developer focused on building modern websites, desktop applications, and automation tools using <strong>n8n</strong>. Seeking <strong>part-time and freelance opportunities</strong> to deliver scalable software solutions and automation for clients and startups. Computer Science student focused on backend development, automation, and scalable systems. Seeking opportunities to build real-world applications and grow as a software engineer.
           </p>
         </div>
 
         <div class="card fade-up">
           <div class="section-title"><h3>Experience</h3></div>
 
-          <!-- Chronological: newest → oldest (Talents2Germany top) -->
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Account Opening Representative — DigiLink360/Ktrade (PSX)</div>
+                <div class="muted">Feb 2026 — Apr 2026</div>
+              </div>
+            </div>
+            <p>Assisted customers in opening accounts for the Pakistan Stock Exchange.</p>
+          </div>
+
+          <div class="exp">
+            <div class="company">
+              <div>
+                <div class="role">Backend Development Intern — Krytix Solutions</div>
+                <div class="muted">Aug 2025 — Sep 2025</div>
+              </div>
+            </div>
+            <p>Worked on backend logic and API development.</p>
+          </div>
+
           <div class="exp">
             <div class="company">
               <div>
@@ -227,24 +224,64 @@ Notes:
         </div>
 
         <div class="card fade-up" style="margin-top:16px">
-          <div class="section-title"><h3>Projects</h3></div>
-          <div id="projects" class="projects">
-            <!-- repos populate here -->
+          <div class="section-title"><h3>Featured Resume Projects</h3></div>
+          <div class="projects">
+            <div class="repo">
+              <div class="meta">
+                <h4>ProDisk Network Website</h4>
+                <p>Built a scalable e-commerce platform using React integrated with Magento handling 450k+ enterprise hardware products.</p>
+              </div>
+            </div>
+            <div class="repo">
+              <div class="meta">
+                <h4>Managix (AI Project Management System)</h4>
+                <p>Developed a role-based system with Kanban boards and AI-powered task assignment and delay prediction.</p>
+              </div>
+            </div>
+            <div class="repo">
+              <div class="meta">
+                <h4>Role-Based Authentication System</h4>
+                <p>Built secure ASP.NET Core API with JWT authentication and role-based access control.</p>
+              </div>
+            </div>
+            <div class="repo">
+              <div class="meta">
+                <h4>Library Management System API</h4>
+                <p>Developed backend API with CRUD operations for managing books and users.</p>
+              </div>
+            </div>
+            <div class="repo">
+              <div class="meta">
+                <h4>Notes CRUD API</h4>
+                <p>Implemented full CRUD functionality using ASP.NET Core and SQL Server.</p>
+              </div>
+            </div>
+            <div class="repo">
+              <div class="meta">
+                <h4>Heap Sort Visualizer</h4>
+                <p>Created Windows Forms app visualizing heap operations and complexity.</p>
+              </div>
+            </div>
+            <div class="repo">
+              <div class="meta">
+                <h4>SJF Scheduling Simulator</h4>
+                <p>Simulated OS scheduling algorithms with Gantt chart visualization.</p>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="card fade-up" style="margin-top:16px">
+          <div class="section-title"><h3>GitHub Projects</h3></div>
+          <div id="projects" class="projects">
+            </div>
         </div>
 
       </section>
 
       <aside>
-        <div class="card fade-up">
-          <div class="section-title"><h3>Education</h3></div>
-          <p><strong>BSCS — PAF-KIET</strong><br><span class="muted">2022 — 2026</span></p>
-          <p><strong>Intermediate — Sindh Board</strong><br><span class="muted">2021</span></p>
-          <p><strong>Matriculation — Sindh Board</strong><br><span class="muted">2019</span></p>
-        </div>
 
         <div class="card fade-up" style="margin-top:14px">
-          <div class="section-title"><h3>Skills</h3></div>
           <div>
             <span class="skill-pill">C# / .NET</span>
             <span class="skill-pill">ASP.NET / MVC</span>
@@ -257,6 +294,14 @@ Notes:
             <span class="skill-pill">n8n Automation</span>
             <span class="skill-pill">Discord Bot Development</span>
             <span class="skill-pill">Leadership</span>
+            <span class="skill-pill">React</span>
+            <span class="skill-pill">Puppeteer</span>
+            <span class="skill-pill">Zapier</span>
+            <span class="skill-pill">Hugging Face</span>
+            <span class="skill-pill">AI Tools (Codex, Claude, Cursor)</span>
+            <span class="skill-pill">GitHub</span>
+            <span class="skill-pill">Communication</span>
+            <span class="skill-pill">Team Collaboration</span>
           </div>
         </div>
 
@@ -265,7 +310,7 @@ Notes:
           <p class="muted">English — Fluent<br>Urdu — Native</p>
         </div>
 
-        <div class="card fade-up" style="margin-top:14px">
+        <div class="card fade-up" id="contact-info" style="margin-top:14px">
           <div class="section-title"><h3>Contact</h3></div>
           <p class="muted">Karachi, Pakistan</p>
           <p>Email: <a href="mailto:huzaifaahmed3211@gmail.com">huzaifaahmed3211@gmail.com</a><br>Phone: <a href="tel:+923212829706">+92 321 2829706</a></p>
