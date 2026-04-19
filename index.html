@@ -1,395 +1,450 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Muhammed Huzaifa — Portfolio</title>
-  <meta name="description" content="Portfolio of Muhammed Huzaifa — .NET Developer, Web & Automation" />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-  <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --accent:#0ea5a3;
-      --accent-2:#60a5fa;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.04);
-      --radius:14px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071023);color:#e6eef8}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:1100px;margin:28px auto;padding:20px}
-
-    /* HERO */
-    .hero{display:grid;grid-template-columns:160px 1fr;gap:22px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:20px;border-radius:18px;backdrop-filter:blur(6px);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
-    .avatar{width:150px;height:150px;border-radius:14px;overflow:hidden;border:4px solid rgba(255,255,255,0.04)}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-    h1{margin:0;font-size:clamp(20px,3.5vw,34px)}
-    .tag{color:var(--muted);margin:8px 0 14px}
-    .cta{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{background:linear-gradient(90deg,var(--accent),#34d399);color:#022; padding:10px 14px;border-radius:12px;font-weight:700;border:none;cursor:pointer}
-    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:12px;color:var(--muted)}
-
-    /* LAYOUT */
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.6)}
-    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-    .section-title h3{margin:0}
-    ul.clean{list-style:none;padding:0;margin:0}
-    .skill-pill{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;margin:6px 6px 0 0;color:var(--muted);font-weight:600}
-    .muted{color:var(--muted);font-size:14px}
-
-    /* Experience */
-    .exp{margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed rgba(255,255,255,0.03)}
-    .company{display:flex;justify-content:space-between;align-items:center}
-    .role{font-weight:700}
-
-    /* Services grid */
-    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .service-card{background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-    .service-card h4{margin:0 0 6px}
-    .service-card p{margin:0;color:var(--muted);font-size:14px}
-
-    /* Projects */
-    .projects{display:grid;grid-template-columns:1fr;gap:12px}
-    .repo{display:flex;justify-content:space-between;align-items:flex-start;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.01)}
-    .repo .meta{max-width:75%}
-    .repo h4{margin:0 0 6px}
-    .repo p{margin:0;color:var(--muted);font-size:13px}
-    .repo .actions{display:flex;gap:8px;align-items:center}
-    .small-btn{padding:8px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
-
-    /* Responsive */
-    @media (max-width:980px){.grid{grid-template-columns:1fr}.services{grid-template-columns:1fr}.avatar{width:110px;height:110px}} 
-
-    /* animations */
-    .fade-up{opacity:0;transform:translateY(8px);animation:fadeUp .6s forwards}
-    @keyframes fadeUp{to{opacity:1;transform:none}}
-  </style>
+  <title>Muhammed Huzaifa — .NET Developer & Automation Engineer</title>
+  <meta name="description"
+    content="Portfolio of Muhammed Huzaifa — .NET Developer, Backend Engineer, Automation Specialist & Discord Bot Developer based in Karachi, Pakistan." />
+  <meta name="keywords"
+    content="Muhammed Huzaifa, .NET Developer, ASP.NET, C#, n8n Automation, Discord Bot, Backend Developer, Karachi" />
+  <meta property="og:title" content="Muhammed Huzaifa — .NET Developer" />
+  <meta property="og:description" content=".NET Developer, Automation Engineer & Backend Developer based in Karachi." />
+  <meta property="og:type" content="website" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div class="container">
+  <div id="cursor-glow" class="cursor-glow"></div>
+  <canvas id="bg-canvas"></canvas>
 
-    <header class="hero fade-up">
-      <div class="avatar">
-        <img src="photo.jpg" alt="Muhammed Huzaifa">
+  <div class="layout">
+
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <h1 class="name">Muhammed<br>Huzaifa</h1>
+        <div class="title">&lt;<span id="typing-text"></span><span
+            style="color:var(--accent);animation:blink 1s step-end infinite">|</span>/&gt;</div>
+        <p class="tagline">I build scalable .NET applications, automation workflows, and backend systems that solve real
+          problems.</p>
+        <div class="avail-badge"><span class="dot"></span> Available for opportunities</div>
+        <nav style="margin-top:40px">
+          <ul class="side-nav">
+            <li><a href="#about"><span class="nav-line"></span>About</a></li>
+            <li><a href="#experience"><span class="nav-line"></span>Experience</a></li>
+            <li><a href="#skills"><span class="nav-line"></span>Skills</a></li>
+            <li><a href="#projects"><span class="nav-line"></span>Projects</a></li>
+            <li><a href="#contact"><span class="nav-line"></span>Contact</a></li>
+          </ul>
+        </nav>
       </div>
-      <div>
-        <h1>Muhammed Huzaifa <span class="muted">— .NET Developer & Automation Engineer</span></h1>
-        <p class="tag">BSCS (PAF-KIET) • .NET & Desktop Apps • n8n Automation • Discord Bot Development</p>
-        <div class="cta">
-          <a class="btn" href="CV.pdf" download>Download CV</a>
-	<a class="ghost" href="#contact-info">Contact</a>
-          <a class="ghost" href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener">GitHub</a>
-          <a class="ghost" href="https://www.linkedin.com/in/muhammed-huzaifa-bin-ahmed-154870276/" target="_blank" rel="noopener">LinkedIn</a>
+
+      <div class="sidebar-bottom">
+        <div class="social-links">
+          <!-- GitHub -->
+          <a href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/muhammed-huzaifa-bin-ahmed-154870276/" target="_blank" rel="noopener"
+            title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:huzaifaahmed3211@gmail.com" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+          <!-- CV -->
+          <a href="CV.pdf" download title="Download CV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+          </a>
         </div>
       </div>
-    </header>
+    </aside>
 
-    <main class="grid">
-      <section>
+    <!-- ═══════════════ MAIN ═══════════════ -->
+    <main class="main">
 
-        <div class="card fade-up" style="margin-bottom:16px">
-          <div class="section-title"><h3>About</h3></div>
-          <p>
-            Passionate .NET and web developer focused on building modern websites, desktop applications, and automation tools using <strong>n8n</strong>. Seeking <strong>part-time and freelance opportunities</strong> to deliver scalable software solutions and automation for clients and startups. Computer Science student focused on backend development, automation, and scalable systems. Seeking opportunities to build real-world applications and grow as a software engineer.
-          </p>
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-label">About</div>
+        <div class="about-text reveal">
+          <p>I'm a <strong>Computer Science student at PAF-KIET</strong> and a passionate developer who builds
+            everything from enterprise-grade .NET backends to intelligent automation agents. My stack spans <strong>C#,
+              ASP.NET Core, WinForms/WPF, React</strong> and workflow automation using <strong>n8n</strong>.</p>
+          <p>When I'm not coding, I'm exploring automation opportunities, contributing to open-source, or experimenting
+            with AI tooling to accelerate development.</p>
         </div>
-
-        <div class="card fade-up">
-          <div class="section-title"><h3>Experience</h3></div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Account Opening Representative — DigiLink360/Ktrade (PSX)</div>
-                <div class="muted">Feb 2026 — Apr 2026</div>
-              </div>
-            </div>
-            <p>Assisted customers in opening accounts for the Pakistan Stock Exchange.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Backend Development Intern — Krytix Solutions</div>
-                <div class="muted">Aug 2025 — Sep 2025</div>
-              </div>
-            </div>
-            <p>Worked on backend logic and API development.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">IT & Customer Service Intern — Talents2Germany</div>
-                <div class="muted">Aug 2025 — Sep 2025</div>
-              </div>
-            </div>
-            <p>Connected the company with international candidates and created <strong>n8n AI agents</strong> to automate the hiring process and improve workflow efficiency.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Business Development Manager & CFO — CyberHub</div>
-                <div class="muted">Feb 2024 — May 2025</div>
-              </div>
-            </div>
-            <p>Helped a call center startup gain clients and manage finances; contributed to strategy and client outreach.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Web Developer Intern → Senior Lead — Gao Tek Inc.</div>
-                <div class="muted">Sep 2023 — May 2024</div>
-              </div>
-            </div>
-            <p>Progressed from Web Developer Intern to Senior Lead; managed a team of 40+, coordinated WordPress page builds and project delivery.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Call Center Representative — The Vision</div>
-                <div class="muted">Aug 2023 — Oct 2023</div>
-              </div>
-            </div>
-            <p>Answered customer queries, provided solutions, and ensured customer satisfaction.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Call Center Representative — Global Resource Group</div>
-                <div class="muted">Jul 2022 — Oct 2022</div>
-              </div>
-            </div>
-            <p>Handled customer calls, addressing concerns and providing solutions.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Call Center Representative — Hello International Marketing Solutions</div>
-                <div class="muted">Mar 2020 — Feb 2022</div>
-              </div>
-            </div>
-            <p>Achieved top sales records and assisted customers with inquiries and support.</p>
-          </div>
-
-          <div class="exp">
-            <div class="company">
-              <div>
-                <div class="role">Typist / Designer — KHF Educational Network</div>
-                <div class="muted">(date not specified in CV)</div>
-              </div>
-            </div>
-            <p>Provided typing and basic design support for educational content.</p>
-          </div>
-
+        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap" class="reveal">
+          <a href="CV.pdf" download
+            style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0a0e1a;font-weight:700;font-size:.875rem;padding:12px 24px;border-radius:8px;transition:all .3s">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download CV
+          </a>
+          <a href="#contact"
+            style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--muted2);font-weight:600;font-size:.875rem;padding:12px 24px;border-radius:8px;border:1px solid var(--border);transition:all .3s">
+            Get in Touch →
+          </a>
         </div>
-
-        <div class="card fade-up" style="margin-top:16px">
-          <div class="section-title"><h3>Services</h3></div>
-          <div class="services">
-            <div class="service-card">
-              <h4>.NET Website Development</h4>
-              <p>Build responsive, secure websites and web apps using .NET (MVC, Razor) and modern front-end tech.</p>
-            </div>
-            <div class="service-card">
-              <h4>Desktop Application Development</h4>
-              <p>Design and deliver Windows desktop apps using C# and .NET (WinForms, WPF).</p>
-            </div>
-            <div class="service-card">
-              <h4>n8n Automation & AI Agents</h4>
-              <p>Automate workflows, integrate APIs and create hiring/operational AI agents using n8n.</p>
-            </div>
-            <div class="service-card">
-              <h4>Discord Bot Development</h4>
-              <p>Create bots for moderation, notifications, and custom community workflows.</p>
-            </div>
-            <div class="service-card">
-              <h4>Database Design & SQL</h4>
-              <p>Design normalized databases, write efficient queries and manage data integrity.</p>
-            </div>
-            <div class="service-card">
-              <h4>Web Automation</h4>
-              <p>Automate workflows you do manually. Like going on a website and filling a form</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card fade-up" style="margin-top:16px">
-          <div class="section-title"><h3>Featured Resume Projects</h3></div>
-          <div class="projects">
-            <div class="repo">
-              <div class="meta">
-                <h4>ProDisk Network Website</h4>
-                <p>Built a scalable e-commerce platform using React integrated with Magento handling 450k+ enterprise hardware products.</p>
-              </div>
-            </div>
-            <div class="repo">
-              <div class="meta">
-                <h4>Managix (AI Project Management System)</h4>
-                <p>Developed a role-based system with Kanban boards and AI-powered task assignment and delay prediction.</p>
-              </div>
-            </div>
-            <div class="repo">
-              <div class="meta">
-                <h4>Role-Based Authentication System</h4>
-                <p>Built secure ASP.NET Core API with JWT authentication and role-based access control.</p>
-              </div>
-            </div>
-            <div class="repo">
-              <div class="meta">
-                <h4>Library Management System API</h4>
-                <p>Developed backend API with CRUD operations for managing books and users.</p>
-              </div>
-            </div>
-            <div class="repo">
-              <div class="meta">
-                <h4>Notes CRUD API</h4>
-                <p>Implemented full CRUD functionality using ASP.NET Core and SQL Server.</p>
-              </div>
-            </div>
-            <div class="repo">
-              <div class="meta">
-                <h4>Heap Sort Visualizer</h4>
-                <p>Created Windows Forms app visualizing heap operations and complexity.</p>
-              </div>
-            </div>
-            <div class="repo">
-              <div class="meta">
-                <h4>SJF Scheduling Simulator</h4>
-                <p>Simulated OS scheduling algorithms with Gantt chart visualization.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card fade-up" style="margin-top:16px">
-          <div class="section-title"><h3>GitHub Projects</h3></div>
-          <div id="projects" class="projects">
-            </div>
-        </div>
-
       </section>
 
-      <aside>
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="section-label">Experience</div>
+        <div class="exp-list">
 
-        <div class="card fade-up" style="margin-top:14px">
-          <div>
-            <span class="skill-pill">C# / .NET</span>
-            <span class="skill-pill">ASP.NET / MVC</span>
-            <span class="skill-pill">WinForms / WPF</span>
-            <span class="skill-pill">Python (basics)</span>
-            <span class="skill-pill">C / C++</span>
-            <span class="skill-pill">SQL</span>
-            <span class="skill-pill">WordPress</span>
-            <span class="skill-pill">Networking & Subnetting</span>
-            <span class="skill-pill">n8n Automation</span>
-            <span class="skill-pill">Discord Bot Development</span>
-            <span class="skill-pill">Leadership</span>
-            <span class="skill-pill">React</span>
-            <span class="skill-pill">Puppeteer</span>
-            <span class="skill-pill">Zapier</span>
-            <span class="skill-pill">Hugging Face</span>
-            <span class="skill-pill">AI Tools (Codex, Claude, Cursor)</span>
-            <span class="skill-pill">GitHub</span>
-            <span class="skill-pill">Communication</span>
-            <span class="skill-pill">Team Collaboration</span>
+          <div class="exp-item reveal">
+            <div class="exp-date">Feb 2026<br>Apr 2026</div>
+            <div>
+              <div class="exp-role">Account Opening Representative</div>
+              <div class="exp-company">DigiLink360 / Ktrade (PSX)</div>
+              <div class="exp-desc">Assisted customers in opening brokerage accounts for the Pakistan Stock Exchange,
+                ensuring smooth onboarding and regulatory compliance.</div>
+              <div class="tags"><span class="tag">Finance</span><span class="tag">Customer Relations</span><span
+                  class="tag">PSX</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item reveal">
+            <div class="exp-date">Aug 2025<br>Sep 2025</div>
+            <div>
+              <div class="exp-role">Backend Development Intern</div>
+              <div class="exp-company">Krytix Solutions</div>
+              <div class="exp-desc">Designed and implemented backend APIs, worked on database schema design, and
+                contributed to RESTful service architecture.</div>
+              <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">REST API</span><span
+                  class="tag">SQL Server</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item reveal">
+            <div class="exp-date">Aug 2025<br>Sep 2025</div>
+            <div>
+              <div class="exp-role">IT & Customer Service Intern</div>
+              <div class="exp-company">Talents2Germany</div>
+              <div class="exp-desc">Built <strong>n8n AI agents</strong> to fully automate the international hiring
+                pipeline — reducing manual screening time significantly and improving candidate matching accuracy.</div>
+              <div class="tags"><span class="tag">n8n</span><span class="tag">AI Agents</span><span class="tag">Workflow
+                  Automation</span><span class="tag">API Integration</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item reveal">
+            <div class="exp-date">Feb 2024<br>May 2025</div>
+            <div>
+              <div class="exp-role">Business Development Manager & CFO</div>
+              <div class="exp-company">CyberHub</div>
+              <div class="exp-desc">Co-led a call center startup from ground up — managed client acquisition, financial
+                planning, and operational strategy.</div>
+              <div class="tags"><span class="tag">Leadership</span><span class="tag">Business Dev</span><span
+                  class="tag">Finance</span></div>
+            </div>
+          </div>
+
+          <div class="exp-item reveal">
+            <div class="exp-date">Sep 2023<br>May 2024</div>
+            <div>
+              <div class="exp-role">Web Developer Intern → Senior Lead</div>
+              <div class="exp-company">Gao Tek Inc.</div>
+              <div class="exp-desc">Rapidly promoted from intern to Senior Lead. Managed a team of <strong>40+
+                  developers</strong>, coordinated WordPress builds, reviewed deliverables, and ensured on-time project
+                delivery at scale.</div>
+              <div class="tags"><span class="tag">WordPress</span><span class="tag">Team Lead</span><span
+                  class="tag">Web Dev</span><span class="tag">Project Management</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-label">Skills</div>
+        <div class="skills-grid">
+          <div class="skill-group reveal">
+            <h4>Languages & Frameworks</h4>
+            <div class="skill-item">
+              <div class="skill-header"><span>C# / .NET</span><span>90%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="90"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>ASP.NET Core / MVC</span><span>85%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="85"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>SQL / SQL Server</span><span>80%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="80"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>React / JavaScript</span><span>70%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="70"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>C / C++</span><span>65%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="65"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>Python</span><span>55%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="55"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-group reveal">
+            <h4>Tools & Platforms</h4>
+            <div class="skill-item">
+              <div class="skill-header"><span>n8n Automation</span><span>90%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="90"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>Discord Bot Dev</span><span>85%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="85"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>WinForms / WPF</span><span>85%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="85"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>Git / GitHub</span><span>80%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="80"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>Puppeteer / Web Scraping</span><span>75%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="75"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span>WordPress / Zapier</span><span>70%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-pct="70"></div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="card fade-up" style="margin-top:14px">
-          <div class="section-title"><h3>Languages</h3></div>
-          <p class="muted">English — Fluent<br>Urdu — Native</p>
+        <!-- Soft skills pills -->
+        <div style="margin-top:32px" class="reveal">
+          <div
+            style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);font-family:var(--mono);margin-bottom:14px">
+            Other</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="tag">Networking & Subnetting</span>
+            <span class="tag">Hugging Face</span>
+            <span class="tag">AI Tools (Codex, Claude, Cursor)</span>
+            <span class="tag">Team Leadership</span>
+            <span class="tag">Agile</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">JWT Auth</span>
+            <span class="tag">Database Design</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-label">Featured Projects</div>
+        <div class="projects-grid">
+
+          <div class="project-card reveal">
+            <div>
+              <div class="project-title">ProDisk Network Website <span class="arrow">↗</span></div>
+              <div class="project-desc">Scalable e-commerce platform built with React integrated with a Magento backend,
+                handling <strong>450,000+ enterprise hardware products</strong>. Optimized for performance and
+                large-scale catalog management.</div>
+              <div class="tags"><span class="tag">React</span><span class="tag">Magento</span><span
+                  class="tag">E-Commerce</span><span class="tag">REST API</span></div>
+            </div>
+          </div>
+
+          <div class="project-card reveal">
+            <div>
+              <div class="project-title">Managix — AI Project Management System <span class="arrow">↗</span></div>
+              <div class="project-desc">Role-based project management system featuring Kanban boards, <strong>AI-powered
+                  task assignment</strong>, and intelligent delay prediction using ML models integrated via API.</div>
+              <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">AI/ML</span><span
+                  class="tag">Kanban</span><span class="tag">SQL Server</span></div>
+            </div>
+          </div>
+
+          <div class="project-card reveal">
+            <div>
+              <div class="project-title">Role-Based Authentication System <span class="arrow">↗</span></div>
+              <div class="project-desc">Secure ASP.NET Core Web API with <strong>JWT authentication</strong>, refresh
+                token rotation, and granular role-based access control (RBAC) ready for production use.</div>
+              <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">JWT</span><span
+                  class="tag">RBAC</span><span class="tag">Security</span></div>
+            </div>
+          </div>
+
+          <div class="project-card reveal">
+            <div>
+              <div class="project-title">Heap Sort Visualizer <span class="arrow">↗</span></div>
+              <div class="project-desc">Interactive Windows Forms application that visualizes heap data structure
+                operations step-by-step with animated transitions and time complexity breakdown.</div>
+              <div class="tags"><span class="tag">C#</span><span class="tag">WinForms</span><span class="tag">Data
+                  Structures</span><span class="tag">Visualization</span></div>
+            </div>
+          </div>
+
+          <div class="project-card reveal">
+            <div>
+              <div class="project-title">SJF Scheduling Simulator <span class="arrow">↗</span></div>
+              <div class="project-desc">Simulates CPU scheduling algorithms (SJF, Round Robin, FCFS) with real-time
+                <strong>Gantt chart visualization</strong> and process statistics output.
+              </div>
+              <div class="tags"><span class="tag">C#</span><span class="tag">OS Concepts</span><span class="tag">Gantt
+                  Chart</span><span class="tag">WinForms</span></div>
+            </div>
+          </div>
+
+          <div class="project-card reveal">
+            <div>
+              <div class="project-title">Library Management System API <span class="arrow">↗</span></div>
+              <div class="project-desc">Full-featured REST API for library operations — books, users, lending, and
+                returns — built with ASP.NET Core and Entity Framework Core.</div>
+              <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">EF Core</span><span
+                  class="tag">REST API</span><span class="tag">CRUD</span></div>
+            </div>
+          </div>
         </div>
 
-        <div class="card fade-up" id="contact-info" style="margin-top:14px">
-          <div class="section-title"><h3>Contact</h3></div>
-          <p class="muted">Karachi, Pakistan</p>
-          <p>Email: <a href="mailto:huzaifaahmed3211@gmail.com">huzaifaahmed3211@gmail.com</a><br>Phone: <a href="tel:+923212829706">+92 321 2829706</a></p>
+        <!-- GitHub Repos -->
+        <div style="margin-top:48px">
+          <div class="section-label" style="margin-bottom:20px">GitHub Repositories</div>
+          <div id="gh-grid" class="github-grid"></div>
+          <div style="text-align:center;margin-top:20px" class="reveal">
+            <a href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener"
+              style="font-size:.85rem;color:var(--muted);font-weight:600;border:1px solid var(--border);padding:10px 24px;border-radius:8px;display:inline-block;transition:all .3s">
+              View All on GitHub →
+            </a>
+          </div>
         </div>
-      </aside>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-label">Contact</div>
+        <div class="contact-wrapper">
+          <p class="contact-intro reveal">
+            I'm open to <strong>freelance projects</strong>, <strong>part-time roles</strong>, and <strong>full-time
+              opportunities</strong>. Whether you have a project in mind or just want to connect — my inbox is always
+            open.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:huzaifaahmed3211@gmail.com" class="contact-link reveal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              huzaifaahmed3211@gmail.com
+            </a>
+            <a href="tel:+923212829706" class="contact-link reveal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+              </svg>
+              +92 321 2829706
+            </a>
+            <a href="https://www.linkedin.com/in/muhammed-huzaifa-bin-ahmed-154870276/" target="_blank" rel="noopener"
+              class="contact-link reveal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+              linkedin.com/in/muhammed-huzaifa-bin-ahmed
+            </a>
+            <a href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener" class="contact-link reveal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+              </svg>
+              github.com/HuzaifaBinAhmed
+            </a>
+            <div class="contact-link reveal" style="cursor:default">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Karachi, Pakistan
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer reveal">
+        <p>Designed &amp; Built by <a href="https://github.com/HuzaifaBinAhmed" target="_blank">Muhammed Huzaifa</a>
+          &nbsp;·&nbsp; © 2025 All rights reserved.</p>
+      </footer>
     </main>
-
-    <footer id="contact" style="margin-top:22px;text-align:center;color:var(--muted)">
-      <p>© 2025 <a href="https://github.com/HuzaifaBinAhmed" target="_blank" rel="noopener">@HuzaifaBinAhmed</a> All Rights Reserved.</p>
-    </footer>
   </div>
 
-  <script>
-    // Progressive reveal
-    document.addEventListener('DOMContentLoaded', ()=>{
-      document.querySelectorAll('.fade-up').forEach((el,i)=>el.style.animationDelay=(i*80)+'ms');
-      fetchRepos();
-    });
+  <style>
+    @keyframes blink {
 
-    async function fetchRepos(){
-      const user = 'HuzaifaBinAhmed';
-      const projectsEl = document.getElementById('projects');
-      projectsEl.innerHTML = '<p class="muted">Loading projects…</p>';
+      0%,
+      100% {
+        opacity: 1
+      }
 
-      try{
-        const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&sort=updated&direction=desc`);
-        if(!res.ok){
-          throw new Error('GitHub API error');
-        }
-        const repos = await res.json();
-        // Filter: exclude forks and empty repos (size === 0)
-        const filtered = repos.filter(r => !r.fork && r.size > 0);
-        if(filtered.length === 0){
-          projectsEl.innerHTML = '<p class="muted">No repositories to show. <a href="https://github.com/'+user+'" target="_blank">Visit GitHub</a></p>';
-          return;
-        }
-
-        projectsEl.innerHTML = '';
-        filtered.forEach(r => {
-          const div = document.createElement('div');
-          div.className = 'repo';
-          const name = document.createElement('div');
-          name.className = 'meta';
-          const title = document.createElement('h4');
-          title.textContent = r.name.replace(/[-_.]/g,' ');
-          const desc = document.createElement('p');
-          desc.textContent = r.description || 'No description provided.';
-          name.appendChild(title);
-          name.appendChild(desc);
-
-          const actions = document.createElement('div');
-          actions.className = 'actions';
-          const link = document.createElement('a');
-          link.href = r.html_url;
-          link.target = '_blank';
-          link.rel = 'noopener';
-          link.className = 'small-btn';
-          link.textContent = 'View on GitHub';
-
-          // additional meta: language and stars
-          const meta = document.createElement('div');
-          meta.style.textAlign = 'right';
-          const lang = document.createElement('div');
-          lang.className = 'muted';
-          lang.textContent = r.language ? r.language + (r.stargazers_count ? ' • ⭐ '+r.stargazers_count : '') : (r.stargazers_count ? '⭐ '+r.stargazers_count : '');
-          meta.appendChild(lang);
-
-          actions.appendChild(link);
-          div.appendChild(name);
-          div.appendChild(actions);
-          div.appendChild(meta);
-          projectsEl.appendChild(div);
-        });
-
-      }catch(err){
-        console.error(err);
-        projectsEl.innerHTML = '<p class="muted">Could not load projects (GitHub rate limit or network issue). <a href="https://github.com/'+user+'" target="_blank">View on GitHub</a></p>';
+      50% {
+        opacity: 0
       }
     }
-  </script>
+  </style>
+  <script src="script.js"></script>
 </body>
+
 </html>
